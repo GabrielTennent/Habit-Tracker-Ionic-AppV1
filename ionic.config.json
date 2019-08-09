@@ -1,5 +1,7 @@
 {
   "name": "SWEN325-AS1",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
