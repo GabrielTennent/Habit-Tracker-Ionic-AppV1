@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Habit Day Manager</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Select Habit</ion-label>
+    <ion-select placeholder="Select habit to add day to!" [(ngModel)]="habitName">
+      <li *ngFor="let habit of habitList">
+        <ion-select-option value={{habit}}>{{habit}}</ion-select-option>
+      </li>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>MM DD YY</ion-label>
+    <ion-datetime displayFormat="MM DD YY" placeholder="Select Date to add" [(ngModel)]="date"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>Did It?</ion-label>
+    <ion-select placeholder="Did the habit?" [(ngModel)]="didIt">
+      <ion-select-option value="yes">Yes</ion-select-option>
+      <ion-select-option value="no">No</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button placeholder="Enter habit name" [disabled]="!habitName || !date || !didIt" (click)="addHabitDay()">
+    Add Day to Habbit!</ion-button>
+
+
+</ion-content>

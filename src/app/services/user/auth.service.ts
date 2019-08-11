@@ -15,12 +15,12 @@ export class AuthService {
   loginUser(
     email: string,
     password: string
-  ): Promise<firebase.auth.UserCredential>{
+  ): Promise<firebase.auth.UserCredential> {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
-
+  
   //Service for signing new user up to firebasedb using the provided email/passw
-  signUpUser(email: string, password: string
+  signupUser(email: string, password: string
   ): Promise<any>{
     return firebase
       .auth()
@@ -43,7 +43,7 @@ export class AuthService {
   }
 
   //log out the user from the firebase
-  logOutUser():Promise<void>{
+  logoutUser():Promise<void>{
     return firebase.auth().signOut();
   }
 }

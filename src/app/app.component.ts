@@ -28,8 +28,5 @@ export class AppComponent {
     StatusBar.hide().catch(error => {
       console.error(error);
     });
-
-    this.platform.ready().then(()=> {
-    });
   }
 }

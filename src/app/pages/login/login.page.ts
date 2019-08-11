@@ -16,43 +16,44 @@ export class LoginPage implements OnInit {
   constructor(
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    private router: Router,
     private authService: AuthService,
+    private router: Router,
     private formBuilder: FormBuilder
-  ) {     
+  ) {
     this.loginForm = this.formBuilder.group({
-      email:['',
-      Validators.compose([Validators.required, Validators.email])],
-      password:['',
-      Validators.compose([Validators.required, Validators.minLength(4)])
+      email: ['',
+        Validators.compose([Validators.required, Validators.email])],
+      password: [
+        '',
+        Validators.compose([Validators.required, Validators.minLength(6)]),
       ],
-    })
+    });
   }
 
   ngOnInit() {
   }
 
-  async userLogin(loginForm: FormGroup): Promise<void>{
-    if(!loginForm.valid){
-      console.log('form is not valid. current val:', loginForm.value);
+  async loginUser(loginForm: FormGroup): Promise<void> {
+    if (!loginForm.valid) {
+      console.log('Form is not valid yet, current value:', loginForm.value);
     } else {
       this.loading = await this.loadingCtrl.create();
       await this.loading.present();
-
+  
       const email = loginForm.value.email;
       const password = loginForm.value.password;
-      
+  
       this.authService.loginUser(email, password).then(
         () => {
-            this.loading.dismiss().then(() => {
-            this.router.navigateByUrl('profile');
+          this.loading.dismiss().then(() => {
+            this.router.navigateByUrl('home');
           });
         },
         error => {
           this.loading.dismiss().then(async () => {
             const alert = await this.alertCtrl.create({
               message: error.message,
-              buttons: [{ text: 'Ok', role: 'cancel'}],
+              buttons: [{ text: 'Ok', role: 'cancel' }],
             });
             await alert.present();
           });

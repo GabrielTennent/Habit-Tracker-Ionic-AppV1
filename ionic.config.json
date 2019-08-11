@@ -1,7 +1,8 @@
 {
   "name": "SWEN325-AS1",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

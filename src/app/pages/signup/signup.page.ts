@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { AuthService } from '../../services/user/auth.service';
 import { LoadingController, AlertController } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/user/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -10,33 +10,39 @@ import { AuthService } from 'src/app/services/user/auth.service';
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
-  public signUpForm: FormGroup;
+  public signupForm: FormGroup;
   public loading: any;
-
   constructor(
-    public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
-    public router: Router,
     private authService: AuthService,
-    private formBuilder: FormBuilder
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
-    this.signUpForm = this.formBuilder.group({
-      email: ['',
-        Validators.compose([Validators.required, Validators.email])],
-      password: ['',
-        Validators.compose([Validators.required, Validators.minLength(4)])
+    this.signupForm = this.formBuilder.group({
+      email: [
+        '',
+        Validators.compose([Validators.required, Validators.email]),
+      ],
+      password: [
+        '',
+        Validators.compose([Validators.minLength(6), Validators.required]),
       ],
     });
   }
 
-  async signUpUser(signUpForm: FormGroup): Promise<void> {
-    if (!signUpForm.valid) {
-      console.log('form is not valid. current val:', signUpForm.value);
-    } else {
-      const email = signUpForm.value.email;
-      const password = signUpForm.value.password;
+  ngOnInit() {}
 
-      this.authService.signUpUser(email, password).then(
+  async signupUser(signupForm: FormGroup): Promise<void> {
+    if (!signupForm.valid) {
+      console.log(
+        'Need to complete the form, current value: ', signupForm.value
+      );
+    } else {
+      const email: string = signupForm.value.email;
+      const password: string = signupForm.value.password;
+  
+      this.authService.signupUser(email, password).then(
         () => {
           this.loading.dismiss().then(() => {
             this.router.navigateByUrl('home');
@@ -56,8 +62,4 @@ export class SignupPage implements OnInit {
       await this.loading.present();
     }
   }
-
-  ngOnInit() {
-  }
-
 }

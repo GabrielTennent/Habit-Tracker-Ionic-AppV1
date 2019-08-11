@@ -1,25 +1,40 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-title></ion-title>
-      <ion-buttons slot="end">
-        <ion-button routerLink="/profile">
-          <ion-icon slot="icon-only" name="person"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-
-<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-title>Tracked Habits</ion-title>
+    <ion-buttons slot="end">
+
+      <ion-button routerLink="/profile">
+        <ion-icon slot="icon-only" name="person"></ion-icon>
+      </ion-button>
+
+      <ion-button routerLink="/habit-create">
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button routerLink="/modify-day">
+        <ion-icon slot="icon-only" name="time"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
   <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+    <ion-list>
+      <li *ngFor="let habit of habitCountList; let i = index">
+        <ion-item>
+          <ion-title>
+            {{this.habitCountList[i].name}}
+          </ion-title>
+          <ion-label>
+      
+            Days tracked: {{this.habitCountList[i].days}}
+            <br>
+            Success rate: %{{this.habitCountList[i].yesDays/this.habitCountList[i].days}}
+          </ion-label>
+        </ion-item>
+      </li>
+    </ion-list>
   </div>
 </ion-content>
