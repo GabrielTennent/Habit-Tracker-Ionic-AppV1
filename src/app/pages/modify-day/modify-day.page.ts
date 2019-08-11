@@ -23,6 +23,8 @@ export class ModifyDayPage implements OnInit {
     private storage: Storage,
     private storageService: StorageService
   ) { 
+    this.storageService.getKeyList();
+    this.habitList = this.storageService.keyList;
   }
 
   ngOnInit() {

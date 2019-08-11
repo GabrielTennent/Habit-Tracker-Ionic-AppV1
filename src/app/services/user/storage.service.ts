@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { ArrayType } from '@angular/compiler';
-import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root'

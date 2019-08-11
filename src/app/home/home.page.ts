@@ -83,10 +83,9 @@ export class HomePage implements OnInit {
     await this.storageService.getValueList(habit)
       .then(val => list = val);
     for (let i = 0; i < list.length; i++) {
-      if (length[i] != "yes"
-        && length[i] != "no") {
-        dayCount++;
-      }
+      if (list[i] != "yes") 
+        if(list[i] != "no")
+          dayCount++;
     }
     return dayCount;
   }
